@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/tkf-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/tkf-{{ version }}.tar.gz
   sha256: 666a717fd1bcd87e97fae0817866c96522b29faa6c3a4a8602e8c809eeadbaa9
 
 build:
@@ -14,12 +14,12 @@ build:
     - tkf = tkf.__main__:main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.5
+    - python {{ python_min }}
   run:
     - backstage
     - cyberpunk-theme <0.0.14
@@ -28,7 +28,7 @@ requirements:
     - litemark
     - megawidget
     - probed
-    - python >=3.5
+    - python >={{ python_min }}
     - shared
     - subrun
     - suggestion
@@ -45,6 +45,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/pyrustic/tkf
